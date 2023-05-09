@@ -6,22 +6,14 @@ from discord import Intents,File
 from discord.ext import commands
 from yaml import safe_load as yaml_load
 
-if len(argv) > 1:
-    aconfig = f"discord_bot_token: {argv[1]}\neleven_key: {argv[2]}\neleven_voiceID: {argv[3]}"
+if not path.exists("config.yaml"):
+    dconfig = "discord_bot_token: \neleven_key: \neleven_voiceID: \nbot_name: "
     with open("config.yaml", "w") as f:
-                f.write(aconfig)
-    with open("config.yaml", 'r') as f:
-        config = yaml_load(f)
-
+                f.write(dconfig)
+    exit("Fill out the config.yaml file")
 else:
-    if not path.exists("config.yaml"):
-        dconfig = "discord_bot_token: \neleven_key: \neleven_voiceID: "
-        with open("config.yaml", "w") as f:
-                    f.write(dconfig)
-        exit("Fill out the config.yaml file")
-    else:
-        with open("config.yaml", 'r') as f:
-                config = yaml_load(f)
+    with open("config.yaml", 'r') as f:
+            config = yaml_load(f)
 
 
 intents = Intents.default()
@@ -32,7 +24,9 @@ client = commands.Bot(command_prefix='!',intents=intents)
 async def on_ready():
     if path.exists("pfp.png"):
         with open('pfp.png', 'rb') as image:
-            await client.user.edit(avatar=image.read(), username="Mr Candy")
+            await client.user.edit(avatar=image.read(), username=config.bot_name)
+    else:
+         await client.user.edit(username=config.bot_name)
     print(f'{client.user} has connected to Discord!')
 
 @client.command()
