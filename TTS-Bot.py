@@ -30,8 +30,9 @@ client = commands.Bot(command_prefix='!',intents=intents)
 
 @client.event
 async def on_ready():
-    with open('./img/candy.png', 'rb') as image:
-        await client.user.edit(avatar=image.read(), username="Mr Candy")
+    if path.exists("pfp.png"):
+        with open('pfp.png', 'rb') as image:
+            await client.user.edit(avatar=image.read(), username="Mr Candy")
     print(f'{client.user} has connected to Discord!')
 
 @client.command()
