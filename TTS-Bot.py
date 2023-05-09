@@ -1,4 +1,3 @@
-from sys import argv
 from requests import post
 from os import remove, path
 from uuid import uuid4
