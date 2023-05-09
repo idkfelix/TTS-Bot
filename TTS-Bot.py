@@ -24,9 +24,9 @@ client = commands.Bot(command_prefix='!',intents=intents)
 async def on_ready():
     if path.exists("pfp.png"):
         with open('pfp.png', 'rb') as image:
-            await client.user.edit(avatar=image.read(), username=config.bot_name)
+            await client.user.edit(avatar=image.read(), username=config["bot_name"])
     else:
-         await client.user.edit(username=config.bot_name)
+         await client.user.edit(username=config["bot_name"])
     print(f'{client.user} has connected to Discord!')
 
 @client.command()
