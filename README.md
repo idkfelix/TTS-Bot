@@ -45,7 +45,7 @@ Replace `<yourToken>` with your Discord bot token, `<yourKey>` with your ElevenL
 4. Run the Docker container and mount your config file using the following command:
 
    ```
-   docker run -d discord-tts-bot -v </path/to/config.yaml>:/config.yaml
+   docker run -d tts-bot -v </path/to/config.yaml>:/config.yaml
    ```
    Replace `</path/to/config.yaml>` with the path to your local config.yaml file.
 
