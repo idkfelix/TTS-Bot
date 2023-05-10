@@ -43,12 +43,15 @@ async def tts(ctx, text):
         "similarity_boost": 0.25
         }
     }
-    r = post(url, headers=headers, json=body)
-    filename = str(uuid4()) + '.mp3'
-    with open(filename, 'wb') as f:
-        f.write(r.content)
-    await ctx.send(file=File(filename))
-    remove(filename)
+    if len(text) <500:
+        r = post(url, headers=headers, json=body)
+        filename = str(uuid4()) + '.mp3'
+        with open(filename, 'wb') as f:
+            f.write(r.content)
+        await ctx.send(file=File(filename))
+        remove(filename)
+    else:
+         await ctx.send("Max message length is 500 characters")
 
 try:
     client.run(config["discord_bot_token"])
